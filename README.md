@@ -34,27 +34,29 @@ Packages Built
 
 Ouput of ~# ffmpeg -formats
 ----------------------------
-ffmpeg version git-2012-11-20-07a8662 Copyright (c) 2000-2012 the FFmpeg developers
-  built on Nov 20 2012 12:27:45 with gcc 4.6 (Ubuntu/Linaro 4.6.3-1ubuntu5)
-  configuration: --enable-gpl --enable-version3 --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-nonfree --enable-libfaac --enable-postproc --enable-x11grab --enable-pthreads --enable-libopenjpeg --enable-zlib --enable-bzlib --enable-filter=movie --enable-avfilter
-  libavutil      52.  8.100 / 52.  8.100
-  libavcodec     54. 73.100 / 54. 73.100
-  libavformat    54. 37.100 / 54. 37.100
-  libavdevice    54.  3.100 / 54.  3.100
-  libavfilter     3. 23.101 /  3. 23.101
-  libswscale      2.  1.102 /  2.  1.102
-  libswresample   0. 17.100 /  0. 17.100
-  libpostproc    52.  2.100 / 52.  2.100
-File formats:
- D. = Demuxing supported
- .E = Muxing supported
- --
-  E 3g2             3GP2 (3GPP2 file format)
-  E 3gp             3GP (3GPP file format)
- D  4xm             4X Technologies
-  E a64             a64 - video for Commodore 64
- D  aac             raw ADTS AAC (Advanced Audio Coding)
- DE ac3             raw AC-3
+    ffmpeg version git-2012-11-20-07a8662 Copyright (c) 2000-2012 the FFmpeg developers
+    built on Nov 20 2012 12:27:45 with gcc 4.6 (Ubuntu/Linaro 4.6.3-1ubuntu5)
+    configuration: --enable-gpl --enable-version3 --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-nonfree --enable-libfaac --enable-postproc --enable-x11grab --enable-pthreads --enable-libopenjpeg --enable-zlib --enable-bzlib --enable-filter=movie --enable-avfilter
+    libavutil      52.  8.100 / 52.  8.100
+    libavcodec     54. 73.100 / 54. 73.100
+    libavformat    54. 37.100 / 54. 37.100
+    libavdevice    54.  3.100 / 54.  3.100
+    libavfilter     3. 23.101 /  3. 23.101
+    libswscale      2.  1.102 /  2.  1.102
+    libswresample   0. 17.100 /  0. 17.100
+    libpostproc    52.  2.100 / 52.  2.100
+    File formats:
+    D. = Demuxing supported
+    .E = Muxing supported
+    --
+    
+    
+    E 3g2             3GP2 (3GPP2 file format)
+    E 3gp             3GP (3GPP file format)
+  D  4xm             4X Technologies
+    E a64             a64 - video for Commodore 64
+  D  aac             raw ADTS AAC (Advanced Audio Coding)
+  DE ac3             raw AC-3
  D  act             ACT Voice file format
  D  adf             Artworx Data Format
   E adts            ADTS AAC (Advanced Audio Coding)
