@@ -5,20 +5,32 @@ Installs encoding packages included with Ubntu 12.04 and builds the latest stabl
 
 Packages for build env
 ----------------------
-git-core 
-build-essential 
-checkinstall 
-yasm
+* git-core 
+* build-essential 
+* checkinstall 
+* yasm
 
 Packages to provide codecs
 --------------------------
-libopenjpeg-dev libfaac-dev libfaad-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libsdl1.2-dev libtheora-dev libvdpau-dev libvorbis-dev libxfixes-dev zlib1g-dev libdirac-dev
+* libopenjpeg-dev 
+* libfaac-dev 
+* libfaad-dev 
+* libmp3lame-dev
+* libopencore-amrnb-dev
+* libopencore-amrwb-dev
+* libsdl1.2-dev
+* libtheora-dev
+* libvdpau-dev
+* libvorbis-dev
+* libxfixes-dev
+* zlib1g-dev
+* libdirac-dev
 
 Packages Built
 --------------
-x264 - a free software library for encoding video streams into the H.264/MPEG-4 AVC format. GPL
-XVID - http://www.xvid.org/
-FFmpeg - https://wiki.videolan.org/FFmpeg
+* x264 - a free software library for encoding video streams into the H.264/MPEG-4 AVC format. GPL
+* XVID - http://www.xvid.org/
+* FFmpeg - https://wiki.videolan.org/FFmpeg
 
 Ouput of ~# ffmpeg -formats
 ----------------------------
