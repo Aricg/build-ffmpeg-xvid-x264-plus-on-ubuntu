@@ -78,6 +78,7 @@ is_264x_installed="$(dpkg -l | grep x264 | grep "$(./version.sh| head -n1 | awk 
 
 if [[ -z "$is_264x_installed" ]];
         then
+                make distclean
                 ./configure --enable-static --disable-asm
                 make
                 sudo checkinstall --pkgname=x264 --pkgversion="3:"$(./version.sh| head -n1 | awk '{print $3}')"-from-script" --backup=no --deldoc=yes --fstrans=no --default
@@ -111,6 +112,7 @@ is_xvid_installed="$(dpkg -l | grep xvid-dev-1.3.2 )"
 if [[ -z "$is_xvid_installed" ]];
         then
                 cd xvidcore/build/generic/
+                make distclean
                 ./configure
                 make
                 sudo checkinstall --pkgname=xvid-dev-1.3.2 --pkgversion="1.3.2-from-script" --backup=no --deldoc=yes --fstrans=no --default
@@ -139,6 +141,7 @@ is_ffmpeg_installed="$(dpkg -l | grep ffmpeg-0.11.1-from-git-source )"
 if [[ -z "$is_ffmpeg_installed" ]];
         then
                 cd ffmpeg
+                make distclean
                 ./configure --enable-gpl --enable-version3 --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb \
                  --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-nonfree --enable-libfaac --enable-postproc \
                  --enable-x11grab --enable-pthreads --enable-libopenjpeg --enable-zlib --enable-bzlib --enable-filter=movie --enable-avfilter \
