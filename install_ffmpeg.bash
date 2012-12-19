@@ -79,7 +79,7 @@ is_264x_installed="$(dpkg -l | grep x264 | grep "$(./version.sh| head -n1 | awk 
 if [[ -z "$is_264x_installed" ]];
         then
                 make distclean
-                ./configure --enable-static --disable-asm
+                ./configure --enable-static --disable-asm --enable-shared
                 make
                 sudo checkinstall --pkgname=x264 --pkgversion="3:"$(./version.sh| head -n1 | awk '{print $3}')"-from-script" --backup=no --deldoc=yes --fstrans=no --default
 fi
