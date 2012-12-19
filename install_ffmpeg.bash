@@ -172,5 +172,5 @@ show_decoding_options
 #
 #cd gpac
 #./configure --enable-shared
-#make
+#make all
 #checkinstall
