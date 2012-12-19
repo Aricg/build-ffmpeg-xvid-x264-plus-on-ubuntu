@@ -123,7 +123,7 @@ fi
 
 
 install_ffmpeg () {
-# INSTALL FFMPEG
+# INSTALL FFMPEG (1.0 has been released need to update this)
 cd ~/
 
 if [ ! -d "ffmpeg" ];
