@@ -142,7 +142,7 @@ if [[ -z "$is_ffmpeg_installed" ]];
                 ./configure --enable-gpl --enable-version3 --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb \
                  --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-nonfree --enable-libfaac --enable-postproc \
                  --enable-x11grab --enable-pthreads --enable-libopenjpeg --enable-zlib --enable-bzlib --enable-filter=movie --enable-avfilter \
-                 --enable-pic
+                 --enable-pic --enable-shared 
                 make
                 checkinstall --pkgname=ffmpeg-0.11.1-from-git-source --pkgversion="0.11.1-from-script" --backup=no --deldoc=yes --fstrans=no --default
 fi
