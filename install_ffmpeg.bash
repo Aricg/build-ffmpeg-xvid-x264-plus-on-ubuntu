@@ -160,4 +160,17 @@ check_if_root
 get_prerequisitpackages
 check_for_conflicting_packages
 show_decoding_options
-                                                                                
+                                    
+
+#wget http://www.libsdl.org/release/SDL-1.2.15.tar.gz
+#cd  cd SDL-1.2.15/
+#./configure --enable-shared
+#make
+#checkinstall
+
+#svn co https://gpac.svn.sourceforge.net/svnroot/gpac/trunk/gpac gpac
+#
+#cd gpac
+#./configure --enable-shared
+#make
+#checkinstall
