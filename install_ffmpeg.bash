@@ -1,5 +1,5 @@
 #!/bin/bash
-#This script assumes vanilla ubnutu 12.04 no extra repositories.
+#This script assumes vanilla ubnutu 12.04 or 10.04 no extra repositories.
 
 check_if_root () {
 if [[ $EUID -ne 0 ]]; then
