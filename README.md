@@ -9,6 +9,7 @@ Packages for build env
 * build-essential 
 * checkinstall 
 * yasm
+* subversion
 
 Packages to provide codecs
 --------------------------
