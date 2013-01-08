@@ -193,6 +193,8 @@ if [ ! -d "ffmpeg" ];
     then
 echo "Downloading and extracting ffmpeg"
                 git clone --depth 1 git://git.videolan.org/ffmpeg
+                git checkout -b git origin/release/1.1
+                git pull  origin release/1.1
                         if [ ! -d "ffmpeg" ];
                                 then
 echo "Clone Failed, not retrying"
