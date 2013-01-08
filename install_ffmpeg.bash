@@ -203,7 +203,7 @@ echo "Clone Failed, not retrying"
 fi
 
 
-is_ffmpeg_installed="$(dpkg -l | grep ffmpeg-0.11.1-from-git-source )"
+is_ffmpeg_installed="$(dpkg -l | grep ffmpeg-1.1-from-git-source )"
 if [[ -z "$is_ffmpeg_installed" ]];
         then
 cd ffmpeg
@@ -213,7 +213,7 @@ cd ffmpeg
                  --enable-x11grab --enable-pthreads --enable-libopenjpeg --enable-zlib --enable-bzlib --enable-filter=movie --enable-avfilter \
                  --enable-pic --enable-shared
                 make
-                checkinstall --pkgname=ffmpeg-0.11.1-from-git-source --pkgversion="0.11.1-from-script" --backup=no --deldoc=yes --fstrans=no --default
+                checkinstall --pkgname=ffmpeg-1.1-from-git-source --pkgversion="1.1-from-git-source" --backup=no --deldoc=yes --fstrans=no --default
 fi
 
 }
