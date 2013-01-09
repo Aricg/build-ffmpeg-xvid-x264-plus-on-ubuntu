@@ -49,7 +49,7 @@ fi
 
 
 
-if [[ -z $(which ffmpeg || true) ]]
+if [[ -z $(which MP4Box || true) ]]
         then
 echo "Installing gpac "
                         install_gpac
@@ -172,11 +172,18 @@ install_gpac () {
 cd ~/
 
 if [ ! -d "gpac" ];
-    then
-echo "Downloading and extracting gpac"
-                svn co https://gpac.svn.sourceforge.net/svnroot/gpac/trunk/gpac gpac
+   then
+      echo "Downloading and extracting gpac"
+      svn co https://gpac.svn.sourceforge.net/svnroot/gpac/trunk/gpac gpac
+                        
+if [ ! -d "gpac" ];
+   then
+      echo "Clone Failed, not retrying"
+   exit 1
+fi
 
-cd gpac
+else
+        cd gpac
         ./configure --enable-shared
         make all
         checkinstall --pkgname=gpac --pkgversion="0.5.1" --default
@@ -186,15 +193,16 @@ fi
 
 
 install_ffmpeg () {
-# INSTALL FFMPEG (1.0 has been released need to update this)
+# INSTALL FFMPEG v1.1
+package_name="ffmpeg-1.1-from-git"
+
 cd ~/
 
 if [ ! -d "ffmpeg" ];
     then
 echo "Downloading and extracting ffmpeg"
                 git clone --depth 1 git://git.videolan.org/ffmpeg
-                git checkout -b git origin/release/1.1
-                git pull  origin release/1.1
+                
                         if [ ! -d "ffmpeg" ];
                                 then
 echo "Clone Failed, not retrying"
@@ -203,17 +211,19 @@ echo "Clone Failed, not retrying"
 fi
 
 
-is_ffmpeg_installed="$(dpkg -l | grep ffmpeg-1.1-from-git-source )"
+is_ffmpeg_installed="$(dpkg -l | grep $package_name)"
 if [[ -z "$is_ffmpeg_installed" ]];
         then
-cd ffmpeg
+                cd ffmpeg
+                git checkout -b git origin/release/1.1
+                git pull  origin release/1.1
                 make distclean
                 ./configure --enable-gpl --enable-version3 --enable-libmp3lame --enable-libopencore-amrnb --enable-libopencore-amrwb \
                  --enable-libtheora --enable-libvorbis --enable-libx264 --enable-libxvid --enable-nonfree --enable-libfaac --enable-postproc \
                  --enable-x11grab --enable-pthreads --enable-libopenjpeg --enable-zlib --enable-bzlib --enable-filter=movie --enable-avfilter \
                  --enable-pic --enable-shared
                 make
-                checkinstall --pkgname=ffmpeg-1.1-from-git-source --pkgversion="1.1-from-git-source" --backup=no --deldoc=yes --fstrans=no --default
+                checkinstall --pkgname="$package_name" --pkgversion="1.1-from-git-source" --backup=no --deldoc=yes --fstrans=no --default
 fi
 
 }
