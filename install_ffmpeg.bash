@@ -1,5 +1,7 @@
 #!/bin/bash
 #This script assumes vanilla ubnutu 12.04 or 10.04 no extra repositories.
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+
 
 check_if_root () {
 if [[ $EUID -ne 0 ]]; then
@@ -76,7 +78,7 @@ install_x264 () {
 #x264 is a free software library for encoding video streams into the H.264/MPEG-4 AVC format. GPL
 
 #get x264
-cd ~/
+cd "$SCRIPT_DIR"
 
 #check that we got it
 if [ ! -d "x264" ];
@@ -112,7 +114,7 @@ fi
 
 install_xvid () {
 # XVID'S WEBSITE http://www.xvid.org/
-cd ~/
+cd "$SCRIPT_DIR"
 if [ ! -d "xvidcore" ];
     then
 echo "Downloading and extracting xvid"
@@ -144,7 +146,7 @@ fi
 }
 
 install_SDL () {
-cd ~/
+cd "$SCRIPT_DIR"
 
 if [ ! -d "SDL-1.2.15" ];
         then
@@ -169,7 +171,7 @@ fi
 
 
 install_gpac () {
-cd ~/
+cd "$SCRIPT_DIR"
 
 if [ ! -d "gpac" ];
    then
@@ -196,7 +198,7 @@ install_ffmpeg () {
 # INSTALL FFMPEG v1.1
 package_name="ffmpeg-1.1-from-git"
 
-cd ~/
+cd "$SCRIPT_DIR"
 
 if [ ! -d "ffmpeg" ];
     then
