@@ -2,7 +2,6 @@
 #This script assumes vanilla ubnutu 12.04 or 10.04 no extra repositories.
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 
-
 check_if_root () {
 if [[ $EUID -ne 0 ]]; then
 echo "This script must be run as root"
@@ -15,72 +14,77 @@ get_prerequisitpackages () {
 apt-get install -f git-core build-essential checkinstall libopenjpeg-dev libfaac-dev \
 libfaad-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libsdl1.2-dev \
 libtheora-dev libvdpau-dev libvorbis-dev libxfixes-dev zlib1g-dev libdirac-dev yasm  \
-subversion 
+subversion
+}
+
+#uninstall these pacakges from you machine if they already exist
+check_for_conflicting_packages () {
+
+for package in mediainfo yasm x264 xvid SDL MP4Box ffmpeg
+        do
+
+
+if [[ -z $(which $package || true) ]]
+        then
+                       install_"$package"
+        else
+                echo "conflicting package "$package" exists, skipping"
+fi
+        done
+
 }
 
 
-check_for_conflicting_packages () {
-if [[ -z $(which ffmpeg || true) ]]
-        then
-echo "Installing x264"
-                        install_x264
-
-        else
-echo "conflicting install exists, aborting"
-                        exit 1
-fi
-
-if [[ -z $(which ffmpeg || true) ]]
-        then
-echo "Installing xvid"
-                       install_xvid
-
-        else
-echo "conflicting install exists, aborting"
-                        exit 1
-fi
-
-if [[ -z $(which ffmpeg || true) ]]
-        then
-echo "Installing SDL"
-                        install_SDL
-        else
-echo "conflicting install exists, aborting"
-                        exit 1
-fi
+install_mediainfo () {
+#!/bin/bash
+apt-get install python-software-properties
+add-apt-repository ppa:shiki/mediainfo
+apt-get update
+apt-get install -f mediainfo
+}
 
 
+#needed to compile lib264 for extra CPU capabilities
+install_yasm () {
 
-if [[ -z $(which MP4Box || true) ]]
-        then
-echo "Installing gpac "
-                        install_gpac
-        else
-echo "conflicting install exists, aborting"
-                        exit 1
+cd "$SCRIPT_DIR"
+
+#get yasm
+if [ ! -d "yasm-1.2.0" ];
+    then
+echo "Downloading yasm repo"
+                wget http://www.tortall.net/projects/yasm/releases/yasm-1.2.0.tar.gz
+                tar -xvf yasm-1.2.0.tar.gz
+
+                        if [ ! -d "yasm-1.2.0" ];
+                                then
+echo "Download Failed, not retrying"
+                                                exit 1
+                        fi
 fi
 
 
-if [[ -z $(which ffmpeg || true) ]]
+is_yasm_installed="$(dpkg -l | grep yasm | grep 1.2.0)"
+if [[ -z "$is_yasm_installed" ]];
+
         then
-echo "Installing ffmpeg"
-                       install_ffmpeg
 
-        else
-echo "conflicting install exists, aborting"
-                        exit 1
+cd yasm-1.2.0/
+./configure
+make
+checkinstall --pkgname=yasm --pkgversion="1.2.0-from-script" --default
+
+        else echo "yasm already installed"
 fi
-
 
 }
 
 install_x264 () {
 #x264 is a free software library for encoding video streams into the H.264/MPEG-4 AVC format. GPL
 
-#get x264
 cd "$SCRIPT_DIR"
 
-#check that we got it
+#get x264
 if [ ! -d "x264" ];
     then
 echo "Cloning x264 repo"
@@ -93,126 +97,133 @@ echo "Clone Failed, not retrying"
                         fi
 fi
 
-cd x264
 
 is_264x_installed="$(dpkg -l | grep x264 | grep "$(./version.sh| head -n1 | awk '{print $3}')")"
 
 if [[ -z "$is_264x_installed" ]];
         then
-git pull
-make distclean
-                ./configure --enable-static --disable-asm --enable-shared
+                cd x264
+                git pull
+                make distclean
+                ./configure --enable-static --enable-shared
                 make
                 sudo checkinstall --pkgname=x264 --pkgversion="3:"$(./version.sh| head -n1 | awk '{print $3}')"-from-script" --backup=no --deldoc=yes --fstrans=no --default
 
-        else echo "264x already installed"
+        else
+                echo "264x already installed"
 fi
 
 
 }
 
-
 install_xvid () {
 # XVID'S WEBSITE http://www.xvid.org/
+
 cd "$SCRIPT_DIR"
+
+#get xvid
 if [ ! -d "xvidcore" ];
     then
-echo "Downloading and extracting xvid"
+                echo "Downloading and extracting xvid"
                 wget http://downloads.xvid.org/downloads/xvidcore-1.3.2.tar.gz
                 tar xvf ./xvidcore-1.3.2.tar.gz
 
                         if [ ! -d "xvidcore" ];
                                 then
-echo "Clone Failed, not retrying"
+echo "Download Failed, not retrying"
                                                 exit 1
                         fi
-fi
-
-if [ -f "xvidcore-1.3.2.tar.gz" ];
-        then
-rm xvidcore-1.3.2.tar.gz
 fi
 
 is_xvid_installed="$(dpkg -l | grep xvid-dev-1.3.2 )"
 if [[ -z "$is_xvid_installed" ]];
         then
-cd xvidcore/build/generic/
+                cd xvidcore/build/generic/
                 make distclean
                 ./configure
                 make
                 sudo checkinstall --pkgname=xvid-dev-1.3.2 --pkgversion="1.3.2-from-script" --backup=no --deldoc=yes --fstrans=no --default
-        else echo "xvid already installed"
+
+        else
+                echo "xvid already installed"
 fi
 }
 
 install_SDL () {
 cd "$SCRIPT_DIR"
 
+#get SDL
 if [ ! -d "SDL-1.2.15" ];
         then
-echo "Downloading and extracting SDL 1.2.15"
+                echo "Downloading and extracting SDL 1.2.15"
                 wget http://www.libsdl.org/release/SDL-1.2.15.tar.gz
                 tar -xvf SDL-1.2.15.tar.gz
-        fi
-
+fi
+                        if [ ! -d "SDL-1.2.15" ];
+                                then
+echo "Download of SDL-1.2.15 Failed, not retrying"
+                                                exit 1
+                        fi
 
 is_SDL_installed="$(dpkg -l | grep sdl | grep 1.2.15)"
 if [[ -z "$is_SDL_installed" ]];
         then
+                cd SDL-1.2.15/
+                ./configure --enable-shared
+                make
+                checkinstall --pkgname=sdl --pkgversion="1.2.15" --backup=no --deldoc=yes --fstrans=no --default
 
-cd SDL-1.2.15/
-./configure --enable-shared
-make
-checkinstall --pkgname=sdl --pkgversion="1.2.15" --backup=no --deldoc=yes --fstrans=no --default
-        else echo "SDL already installed"
-
+        else
+                echo "SDL already installed"
 fi
 }
 
 
-install_gpac () {
+install_MP4Box () {
 cd "$SCRIPT_DIR"
 
-if [ ! -d "gpac" ];
+#get MP4box
+if [ ! -d "MP4Box" ];
    then
-      echo "Downloading and extracting gpac"
-      svn co https://gpac.svn.sourceforge.net/svnroot/gpac/trunk/gpac gpac
-                        
-if [ ! -d "gpac" ];
-   then
-      echo "Clone Failed, not retrying"
-   exit 1
+              echo "Cloning MP4Box Repo"
+              svn co https://gpac.svn.sourceforge.net/svnroot/gpac/trunk/gpac MP4Box
 fi
 
-else
-        cd gpac
-        ./configure --enable-shared
-        make all
-        checkinstall --pkgname=gpac --pkgversion="0.5.1" --default
+                        if [ ! -d "MP4box" ];
+                                then
+echo "Cloning MP4box Failed, not retrying"
+                                                exit 1
+                        fi
+is_MP4box_installed="$(dpkg -l | grep MP4box | grep 0.5.1)"
+if [[ -z "$is_MP4box_installed" ]];
+        then
+                cd MP4Box
+                ./configure --enable-shared
+                make all
+                checkinstall --pkgname=MP4Box --pkgversion="0.5.1" --default
+
+        else
+                echo "MP4box already installed"
+
 fi
 }
-
-
 
 install_ffmpeg () {
-# INSTALL FFMPEG v1.1
 package_name="ffmpeg-1.1-from-git"
-
 cd "$SCRIPT_DIR"
 
+#get ffmpeg
 if [ ! -d "ffmpeg" ];
     then
-echo "Downloading and extracting ffmpeg"
-                git clone --depth 1 git://git.videolan.org/ffmpeg
-                
+                echo "Downloading and extracting ffmpeg"
+                git clone --depth 1 git://git.videolan.org/ffmpeg ffmpeg
+
+fi
                         if [ ! -d "ffmpeg" ];
                                 then
 echo "Clone Failed, not retrying"
                                                 exit 1
                         fi
-fi
-
-
 is_ffmpeg_installed="$(dpkg -l | grep $package_name)"
 if [[ -z "$is_ffmpeg_installed" ]];
         then
@@ -226,6 +237,8 @@ if [[ -z "$is_ffmpeg_installed" ]];
                  --enable-pic --enable-shared
                 make
                 checkinstall --pkgname="$package_name" --pkgversion="1.1-from-git-source" --backup=no --deldoc=yes --fstrans=no --default
+        else
+                echo "ffmpeg already installed"
 fi
 
 }
@@ -238,3 +251,4 @@ check_if_root
 get_prerequisitpackages
 check_for_conflicting_packages
 show_decoding_options
+                                                        
