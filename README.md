@@ -8,10 +8,9 @@ Packages for build env
 * git-core 
 * build-essential 
 * checkinstall 
-* yasm
 * subversion
 
-Packages to provide codecs
+Packages to provide codecs/etc
 --------------------------
 * libopenjpeg-dev 
 * libfaac-dev 
@@ -26,14 +25,16 @@ Packages to provide codecs
 * libxfixes-dev
 * zlib1g-dev
 * libdirac-dev
+* mediainfo
 
 Packages Built
 --------------
 * x264 - a free software library for encoding video streams into the H.264/MPEG-4 AVC format. GPL
 * XVID - http://www.xvid.org/ video codec
 * SDL - http://www.libsdl.org/ cross-platform multimedia library
-* GPAC - http://gpac.wp.mines-telecom.fr/ Provides MP4Box
+* MP4box - http://gpac.wp.mines-telecom.fr/ a multimedia packager
 * FFmpeg - https://wiki.videolan.org/FFmpeg 
+* Yasm - http://yasm.tortall.net/ Needed for lib264's extented cpu capabilities 
 
 Output of ~# ffmpeg -formats
 ----------------------------
