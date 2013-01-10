@@ -30,10 +30,12 @@ Packages to provide codecs
 Packages Built
 --------------
 * x264 - a free software library for encoding video streams into the H.264/MPEG-4 AVC format. GPL
-* XVID - http://www.xvid.org/
-* FFmpeg - https://wiki.videolan.org/FFmpeg
+* XVID - http://www.xvid.org/ video codec
+* SDL - http://www.libsdl.org/ cross-platform multimedia library
+* GPAC - http://gpac.wp.mines-telecom.fr/ Provides MP4Box
+* FFmpeg - https://wiki.videolan.org/FFmpeg 
 
-Ouput of ~# ffmpeg -formats
+Output of ~# ffmpeg -formats
 ----------------------------
     ffmpeg version git-2012-11-20-07a8662 Copyright (c) 2000-2012 the FFmpeg developers
     built on Nov 20 2012 12:27:45 with gcc 4.6 (Ubuntu/Linaro 4.6.3-1ubuntu5)
