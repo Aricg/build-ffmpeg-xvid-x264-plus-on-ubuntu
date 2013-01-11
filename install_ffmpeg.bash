@@ -35,7 +35,6 @@ fi
 
 
 install_mediainfo () {
-#!/bin/bash
 apt-get install python-software-properties
 add-apt-repository ppa:shiki/mediainfo
 apt-get update
