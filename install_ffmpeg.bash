@@ -186,7 +186,7 @@ if [ ! -d "MP4Box" ];
 			svn co https://gpac.svn.sourceforge.net/svnroot/gpac/trunk/gpac MP4Box
 fi
 
-	if [ ! -d "MP4box" ];
+	if [ ! -d "MP4Box" ];
 	then
 echo "Cloning MP4box Failed, not retrying"
 	exit 1
