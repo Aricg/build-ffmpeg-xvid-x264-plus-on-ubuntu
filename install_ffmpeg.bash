@@ -1,6 +1,6 @@
 #!/bin/bash
 #This script assumes vanilla ubnutu 12.04 or 10.04 no extra repositories.
-script_dir=$(cd "$(dirname "$0")" && pwd)
+script_dir=$(cd "$(dirname "$0")" && pwd) #This is actually badmojo -> http://mywiki.wooledge.org/BashFAQ/028 (will fix)
 
 check_if_root () {
 if [[ $EUID -ne 0 ]]; then
