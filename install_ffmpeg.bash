@@ -248,3 +248,11 @@ check_if_root
 get_prerequisitpackages
 check_for_conflicting_packages
 show_decoding_options
+
+#TODO
+#apt-get install libjpeg-progs imagemagick 
+yamdi () {
+#wget  http://downloads.sourceforge.net/project/yamdi/yamdi/1.9/yamdi-1.9.tar.gz
+#gcc yamdi.c -o yamdi -O2 -Wall
+#cp yamdi /usr/local/bin
+#}
