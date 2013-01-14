@@ -1,4 +1,4 @@
-build-ffmpeg-xvid-x264-and other extras for encoder machines onubuntu
+build ffmpeg/xvid/x264 and others on Ubuntu 10 and 12.04
 ===============================
 
 Builds and Installs encoding packages listed below on Ubuntu 10/12.04 and builds the latest stable releases of x264 xvid and ffmpeg
