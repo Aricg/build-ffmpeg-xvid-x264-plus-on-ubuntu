@@ -1,6 +1,6 @@
 #!/bin/bash
 #This script assumes vanilla ubnutu 12.04 or 10.04 no extra repositories.
-SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+script_dir=$(cd "$(dirname "$0")" && pwd)
 
 check_if_root () {
 if [[ $EUID -ne 0 ]]; then
@@ -45,7 +45,7 @@ apt-get install -f mediainfo
 #needed to compile lib264 for extra CPU capabilities
 install_yasm () {
 
-cd "$SCRIPT_DIR"
+cd "$script_dir"
 
 #get yasm
 if [ ! -d "yasm-1.2.0" ];
@@ -79,7 +79,7 @@ fi
 install_x264 () {
 #x264 is a free software library for encoding video streams into the H.264/MPEG-4 AVC format. GPL
 
-cd "$SCRIPT_DIR"
+cd "$script_dir"
 
 #get x264
 if [ ! -d "x264" ];
@@ -116,7 +116,7 @@ fi
 install_xvid () {
 # XVID'S WEBSITE http://www.xvid.org/
 
-cd "$SCRIPT_DIR"
+cd "$script_dir"
 
 #get xvid
 if [ ! -d "xvidcore" ];
@@ -147,7 +147,7 @@ fi
 }
 
 install_SDL () {
-cd "$SCRIPT_DIR"
+cd "$script_dir"
 
 #get SDL
 if [ ! -d "SDL-1.2.15" ];
@@ -177,7 +177,7 @@ fi
 
 
 install_MP4Box () {
-cd "$SCRIPT_DIR"
+cd "$script_dir"
 
 #get MP4box
 if [ ! -d "MP4Box" ];
@@ -207,7 +207,7 @@ fi
 
 install_ffmpeg () {
 package_name="ffmpeg-1.1-from-git"
-cd "$SCRIPT_DIR"
+cd "$script_dir"
 
 #get ffmpeg
 if [ ! -d "ffmpeg" ];
