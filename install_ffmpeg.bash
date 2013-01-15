@@ -250,7 +250,7 @@ check_for_conflicting_packages
 show_decoding_options
 
 #TODO
-#apt-get install libjpeg-progs imagemagick 
+#apt-get install libjpeg-progs imagemagick php5-curl php5-mysql
 #yamdi () {
 #wget  http://downloads.sourceforge.net/project/yamdi/yamdi/1.9/yamdi-1.9.tar.gz
 #gcc yamdi.c -o yamdi -O2 -Wall
