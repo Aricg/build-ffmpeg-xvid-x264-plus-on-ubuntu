@@ -10,8 +10,8 @@ fi
 }
 
 get_prerequisitpackages () {
-#apt-get update
-apt-get install -f git-core build-essential checkinstall libopenjpeg-dev libfaac-dev \
+export DEBIAN_FRONTEND=noninteractive
+apt-get install -f -y git-core build-essential checkinstall libopenjpeg-dev libfaac-dev \
 libfaad-dev libmp3lame-dev libopencore-amrnb-dev libopencore-amrwb-dev libsdl1.2-dev \
 libtheora-dev libvdpau-dev libvorbis-dev libxfixes-dev zlib1g-dev libdirac-dev subversion 
 }
