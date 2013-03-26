@@ -3,10 +3,7 @@
 script_dir=$(cd "$(dirname "$0")" && pwd) #This is actually badmojo -> http://mywiki.wooledge.org/BashFAQ/028 (will fix)
 
 check_if_root () {
-if [[ $EUID -ne 0 ]]; then
-echo "This script must be run as root"
-   exit 1
-fi
+[[ $UID = 0 ]] && echo "This script must be run as root"; exit 1
 }
 
 get_prerequisitpackages () {
